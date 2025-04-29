@@ -18,15 +18,17 @@ export class AnimalsService {
     return this.animalModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} animal`;
+  findOne(id) {
+    return this.animalModel.findById(id).exec();
   }
 
-  update(id: number, updateAnimalDto: UpdateAnimalDto) {
-    return `This action updates a #${id} animal`;
+  update(id: string, updateAnimalDto: UpdateAnimalDto) {
+    return this.animalModel
+      .findByIdAndUpdate(id, { $set: updateAnimalDto })
+      .exec();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} animal`;
+  remove(id) {
+    return this.animalModel.findByIdAndDelete(id).exec();
   }
 }

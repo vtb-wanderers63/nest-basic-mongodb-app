@@ -27,16 +27,16 @@ export class TemplateDoController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.AnimalsService.findOne(+id);
+    return this.AnimalsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() UpdateAnimalDto: UpdateAnimalDto) {
-    return this.AnimalsService.update(+id, UpdateAnimalDto);
+    return this.AnimalsService.update(id, UpdateAnimalDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.AnimalsService.remove(+id);
+    return this.AnimalsService.remove(id);
   }
 }
