@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTemplateDoDto } from './dto/create-template-do.dto';
-import { UpdateTemplateDoDto } from './dto/update-template-do.dto';
+import { CreateAnimalDto } from './dto/create-animal.dto';
+import { UpdateAnimalDto } from './dto/update-animal.dto';
+
+import { InjectModel } from '@nestjs/mongoose';
+import { Animal } from './schema/animal.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
-export class TemplateDoService {
-  create(createTemplateDoDto: CreateTemplateDoDto) {
-    return 'This action adds a new templateDo';
+export class AnimalsService {
+  constructor(@InjectModel(Animal.name) private animalModel: Model<Animal>) {}
+  create(createAnimalDto: CreateAnimalDto) {
+    const createdAnimal = new this.animalModel(createAnimalDto);
+    return createdAnimal.save();
   }
 
-  findAll() {
-    return `This action returns all templateDo`;
+  findAll(): Promise<Animal[]> {
+    return this.animalModel.find().exec();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} templateDo`;
+    return `This action returns a #${id} animal`;
   }
 
-  update(id: number, updateTemplateDoDto: UpdateTemplateDoDto) {
-    return `This action updates a #${id} templateDo`;
+  update(id: number, updateAnimalDto: UpdateAnimalDto) {
+    return `This action updates a #${id} animal`;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} templateDo`;
+    return `This action removes a #${id} animal`;
   }
 }

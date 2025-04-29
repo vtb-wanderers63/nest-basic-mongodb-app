@@ -1,34 +1,42 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TemplateDoService } from './template-do.service';
-import { CreateTemplateDoDto } from './dto/create-template-do.dto';
-import { UpdateTemplateDoDto } from './dto/update-template-do.dto';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { AnimalsService } from './template-do.service';
+import { CreateAnimalDto } from './dto/create-animal.dto';
+import { UpdateAnimalDto } from './dto/update-animal.dto';
 
 @Controller('template-do')
 export class TemplateDoController {
-  constructor(private readonly templateDoService: TemplateDoService) {}
+  constructor(private readonly AnimalsService: AnimalsService) {}
 
   @Post()
-  create(@Body() createTemplateDoDto: CreateTemplateDoDto) {
-    return this.templateDoService.create(createTemplateDoDto);
+  create(@Body() CreateAnimalDto: CreateAnimalDto) {
+    return this.AnimalsService.create(CreateAnimalDto);
   }
 
   @Get()
   findAll() {
-    return this.templateDoService.findAll();
+    return this.AnimalsService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.templateDoService.findOne(+id);
+    return this.AnimalsService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTemplateDoDto: UpdateTemplateDoDto) {
-    return this.templateDoService.update(+id, updateTemplateDoDto);
+  update(@Param('id') id: string, @Body() UpdateAnimalDto: UpdateAnimalDto) {
+    return this.AnimalsService.update(+id, UpdateAnimalDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.templateDoService.remove(+id);
+    return this.AnimalsService.remove(+id);
   }
 }

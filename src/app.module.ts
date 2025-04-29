@@ -6,7 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TemplateDoModule } from './template-do/template-do.module';
 
 @Module({
-  imports: [HealthModule, MongooseModule.forRoot('mongodb://localhost/nest'), TemplateDoModule],
+  imports: [HealthModule, MongooseModule.forRoot('mongodb://localhost/template-animal'), TemplateDoModule],
   controllers: [AppController],
   providers: [AppService],
 })
